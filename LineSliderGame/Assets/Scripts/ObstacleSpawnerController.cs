@@ -7,6 +7,7 @@ public class ObstacleSpawnerController : MonoBehaviour
     // Start is called before the first frame update
     public List<GameObject> Obstacles;
     public float SpawnRate;
+    private GameObject PreviousObstacle;
     void Start()
     {
         StartCoroutine("SpawnObsticals");
@@ -20,7 +21,7 @@ public class ObstacleSpawnerController : MonoBehaviour
 
     IEnumerator SpawnObsticals()
     {
-        while (true)
+        while (GameManager.GameMangerInstance.isGameStarted)
         {
             Spawn();
 
@@ -33,7 +34,9 @@ public class ObstacleSpawnerController : MonoBehaviour
     private void Spawn()
     {
         int randomObstacle = Random.Range(0, Obstacles.Count);
+        var currentObstacle = Obstacles[randomObstacle];
         Instantiate(Obstacles[randomObstacle], Obstacles[randomObstacle].transform.position, Obstacles[randomObstacle].transform.rotation);
+        PreviousObstacle = currentObstacle;
 
     }
 

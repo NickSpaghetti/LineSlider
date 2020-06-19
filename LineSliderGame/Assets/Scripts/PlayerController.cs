@@ -71,13 +71,11 @@ public class PlayerController : MonoBehaviour
                 {
                     if ((_initalTouchPosiition.y - _endTouchPosiition.y) > 0) // down swipe
                     {
-                        //add moving cod here
-                        Flip();
+                        FlipDown();
                     }
                     else if ((_initalTouchPosiition.y - _endTouchPosiition.y) < 0) // up swipe
                     {
-                        //add moving cod here
-                        Flip();
+                        FlipUp();
                     }
                 }
 
@@ -92,6 +90,20 @@ public class PlayerController : MonoBehaviour
             //player position switch
             Flip();
         }
+    }
+
+    private void FlipUp()
+    {
+        transform.position = new Vector3(_playerPosition.x, _playerPosition.y, _playerPosition.z);
+        transform.rotation = new Quaternion(0, 0, transform.position.z, 0);
+        Particle.transform.position = new Vector3(-5.1f, 0.5f, _playerPosition.z);
+    }
+
+    private void FlipDown()
+    {
+        transform.position = new Vector3(-4.66f, -1.26f, _playerPosition.z);
+        transform.rotation = new Quaternion(-173.39f, -15.51f, transform.position.z, 0);
+        Particle.transform.position = new Vector3(-5.1f, -1.07f, _playerPosition.z);
     }
 
     private void Flip()
